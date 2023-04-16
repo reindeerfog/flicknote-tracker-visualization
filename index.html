@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<title>Beyond the Network</title>
+<title>Skaven</title>
 <style>body { background: black; }</style>
 <body>
-<script src="beyond.js"></script>
-<audio style="width:90%" id="song" src="beyond.ogg" controls></audio><br>
+<script src="music/skaven/ramagardens/ramagardens_remake.js"></script>
+<audio style="width:90%" id="song" src="music/skaven/ramagardens/ramagardens_remake.ogg" controls></audio><br>
 <canvas id="canvas"></canvas>
 
 <script>
@@ -11,21 +11,7 @@
 var info = []
 
 var tracklist = [
-    [0, 'Beyond the Network', 0]
-  , [9, 'The Journey Begins', 0]
-  , [20, 'Rain of Lights', 1]
-  , [28, 'LightStorm', 2]
-  , [40, 'Sea of Amorphity', 1]
-  , [52, 'Masked Intentions', 0]
-  , [68, 'Routinoid', 3]
-  , [89, 'Tunnel Society v2.0', 0]
-  , [120, 'A New Beginning (intro 2)', 2]
-  , [124, 'Silent Conquest', 1]
-  , [139, 'Schein', 4]
-  , [149, 'Choose and Contemplate', 1]
-  , [158, 'Breathing Love', 4]
-  , [167, 'Jewels of Denial', 0]
-  , [182, '']
+    [0, 'Ramagardens', 2]
   ]
 
 var tracks = []
@@ -44,7 +30,7 @@ var tracks = []
     for (var j = 0; j < c.text.length; j ++) {
       cached[c.text[j][0]] = { text: c.text[j][1].split(' '), volume: c.text[j][2] }
     }
-    for (var j = 0; j < 14; j ++) {
+    for (var j = 0; j < 8; j ++) { //channel number
       channels.push(cached[j])
     }
     info.push({
@@ -60,10 +46,10 @@ var tracks = []
 
 var canvas = document.getElementById('canvas')
 var width, height;
-canvas.width = width = 960;
+canvas.width = width = 960;//potentially alter to change aspect ratio?
 canvas.height = height = 540;
-canvas.width = 1280
-canvas.height = 720
+canvas.width = 1920
+canvas.height = 1080
 
 var ctx = canvas.getContext('2d')
 ctx.scale(canvas.width / width, canvas.height / height)
@@ -101,7 +87,7 @@ function draw(time) {
   var row = getrow(sample)
     , off = info[row] && info[row + 1] ? (sample - info[row].sample) / (info[row + 1].sample - info[row].sample) : 0
   ctx.save()
-  ctx.font = 'bold 11px Ubuntu Mono'
+  ctx.font = 'bold 11px Courier New'
   var tno = gettrack(sample)
   var track = tracks[tno]
   for (var i = -30; i <= 36; i ++) {
@@ -135,8 +121,8 @@ function draw(time) {
   if (alpha >= 0.01) {
     ctx.fillStyle = 'rgba(255,255,255,' + alpha + ')';
     ctx.font = '600 20px Helvetica Neue'
-    ctx.fillText('Bejeweled II suite', 54, 70)
-    ctx.fillText('(C) Peter Hajba 2003/2004', 54, 96)
+    ctx.fillText('Original composed 08/12/1993 - Remake 15/07/2003', 54, 70)
+    ctx.fillText('(C) Skaven / Future Crew', 54, 96)
   }
   ctx.restore()
 }
@@ -148,7 +134,7 @@ function drawRow(row, y, active, ahead, theme, sample) {
       ctx.fillRect(0, y - 11, width, 2)
     }
   }
-  for (var i = 0; i < 14; i ++) {
+  for (var i = 0; i < 8; i ++) { //also channel number
     var cur = row.channels[i]
       , text = cur.text
       , fx = text[3]

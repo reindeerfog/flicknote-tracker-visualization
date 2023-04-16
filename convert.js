@@ -4,7 +4,7 @@ var fs = require('fs')
 console.log('var songdata = ');
 
 var out = []
-fs.readFile('beyond.log', 'utf-8', function(err, data) {
+fs.readFile('starfox.log', 'utf-8', function(err, data) {
   var lines = data.split('\n')
   lines.forEach(function(line) {
     var o = {text: []}
